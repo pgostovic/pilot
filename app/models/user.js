@@ -1,0 +1,61 @@
+var mongoose = require("mongoose");
+var phnq_core = require("phnq_core");
+var log = require("phnq_log").create(__filename);
+var crypto = require("crypto");
+var config = require("../../config");
+
+var userSchema = new mongoose.Schema(
+{
+	email: String,
+	password: String
+});
+
+phnq_core.extend(userSchema.statics,
+{
+	findById: function(id, fn)
+	{
+		User.findOne({"_id":id}, function(err, user)
+		{
+			fn(err, user);
+		});
+	},
+
+	findByEmail: function(email, fn)
+	{
+		User.findOne({"email":email}, function(err, user)
+		{
+			fn(err, user);
+		});
+	}
+});
+
+phnq_core.extend(userSchema.methods,
+{
+	toJSON: function()
+	{
+		var obj = this.toObject();
+		obj.id = obj._id;
+		delete obj._id;
+		delete obj.__v;
+		delete obj.password;
+		return obj;
+	},
+
+	setPassword: function(password)
+	{
+		var hash = crypto.createHash("md5");
+		hash.update(config.password_salt, "UTF-8");
+		hash.update(password, "UTF-8");
+		this.password = hash.digest("hex");
+	},
+
+	isPasswordValid: function(password)
+	{
+		var hash = crypto.createHash("md5");
+		hash.update(config.password_salt, "UTF-8");
+		hash.update(password, "UTF-8");
+		return hash.digest("hex") == this.password;
+	}
+});
+
+var User = module.exports = mongoose.connection.model("User", userSchema);
