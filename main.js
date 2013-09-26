@@ -93,4 +93,4 @@ app.listen(config.port, function()
 // Widgets
 phnq_widgets.start({express: app, appRoot:path.join(__dirname, config.appRoot)});
 
-repl.start({});
+// repl.start({});
