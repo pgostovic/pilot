@@ -14,6 +14,7 @@
         "passport-local": "0.1.x",
         "mongoose": "3.5.x",
 		"underscore": "1.5.x",
+		"nodemailer": "0.5.x",
 		"zombie": "2.x",
 		"mocha": "1.x"
 	},

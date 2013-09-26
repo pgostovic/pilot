@@ -14,6 +14,21 @@ var repl = require("repl");
 
 var app = express();
 
+module.exports =
+{
+	getServerBaseUrl: function()
+	{
+		var buf = [];
+		buf.push(config.secure ? "https://" : "http://");
+		buf.push(config.host);
+		if((config.secure && config.port != 443) || (!config.secure && config.port != 80))
+		{
+			buf.push(":"+config.port);
+		}
+		return buf.join("");
+	}
+};
+
 // hang the authenticator on the app for convenience
 app.auth = auth;
 
@@ -77,6 +92,5 @@ app.listen(config.port, function()
 
 // Widgets
 phnq_widgets.start({express: app, appRoot:path.join(__dirname, config.appRoot)});
-
 
 repl.start({});

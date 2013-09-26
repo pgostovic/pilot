@@ -4,28 +4,28 @@ var LocalStrategy = require("passport-local").Strategy;
 
 module.exports =
 {
-    ensureAuthenticated: function(req, res, next)
+    authenticate: function(req, res, next)
     {
-        ensureAuthenticated(req, res, next, false);
+        authenticate(req, res, next, false);
     },
 
-    ensureAuthenticatedNoRedirect: function(req, res, next)
+    authenticateNoRedirect: function(req, res, next)
     {
-        ensureAuthenticated(req, res, next, true);
+        authenticate(req, res, next, true);
     }
 };
 
-var ensureAuthenticated = function(req, res, next, suppressRedirect)
+var authenticate = function(req, res, next, suppressRedirect)
 {
     if(req.params.id == "me" && req.user)
         req.params.id = req.user._id;
 
     // If the user is unconfirmed then they only get to see /change_password
-    // if(req.user && req.user.isUnconfirmed())
-    // {
-    //     if(req.url != "/change_password")
-    //         return res.redirect("/change_password");
-    // }
+    if(req.user && req.user.isUnconfirmed())
+    {
+        if(req.url != "/change_password")
+            return res.redirect("/change_password");
+    }
 
     if (req.isAuthenticated() || suppressRedirect)
         return next();

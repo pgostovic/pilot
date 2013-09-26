@@ -17,3 +17,8 @@ On the trainer:
 - TrainerRoad style with trainer power curves for "virtual power"
 
 https://buy.garmin.com/en-US/US/on-the-go/mobileaccessories/ant-adapter-for-iphone/prod103887.html
+
+Or this is cool too:
+- HR strap that also converts Ant+ to bluetooth
+
+http://www.dcrainmaker.com/2013/07/viiiiva-bluetooth-bridge.html
