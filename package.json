@@ -18,11 +18,13 @@
 		"zombie": "2.x",
 		"mocha": "1.x"
 	},
-	"scripts": {
+	"scripts":
+	{
 		"start": "node ./main.js",
 		"test": "mocha -t 60000 -R spec"
 	},
-	"engines": {
+	"engines":
+	{
 		"node": "0.10.x"
 	},
 	"subdomain": "pilot"
