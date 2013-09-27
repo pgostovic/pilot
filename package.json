@@ -2,7 +2,6 @@
 	"name": "pilot",
 	"description": "Plan and Log for Training",
 	"author": "Patrick Gostovic <pg@phnq.org>",
-	"main": "main.js",
 	"version": "0.1.0",
 	"dependencies":
 	{
@@ -14,16 +13,18 @@
         "passport-local": "0.1.x",
         "mongoose": "3.5.x",
 		"underscore": "1.5.x",
-		"nodemailer": "0.5.x"
+		"nodemailer": "0.5.x",
+		"zombie": "2.x",
+		"mocha": "1.x"
 	},
 	"scripts":
 	{
-		"start": "node ./main.js",
+		"start": "node main",
 		"test": "mocha -t 60000 -R spec"
 	},
 	"engines":
 	{
-		"node": "0.10.x"
-	},
-	"subdomain": "pilot"
+        "node": "0.10.x",
+        "npm": "1.2.x"
+	}
 }
