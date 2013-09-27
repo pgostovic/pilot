@@ -54,12 +54,12 @@ app.configure('development', function()
 	phnq_widgets.config.compressCSS = false;
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
-	var firstArg = process.argv.length > 0 && process.argv[1] ? process.argv[1] : null;
-
-	if(firstArg && firstArg.match("/mocha/"))
-		phnq_core.extend(config, config.test);
-	else
-		phnq_core.extend(config, config.dev);
+    // var firstArg = process.argv.length > 0 && process.argv[1] ? process.argv[1] : null;
+    // 
+    // if(firstArg && firstArg.match("/mocha/"))
+    //     phnq_core.extend(config, config.test);
+    // else
+    //     phnq_core.extend(config, config.dev);
 });
 
 // Configuration: production-specific
@@ -72,7 +72,7 @@ app.configure('production', function()
 	phnq_widgets.config.compressJS = true;
 	phnq_widgets.config.compressCSS = true;
 	app.use(express.errorHandler());
-	phnq_core.extend(config, config.prod);
+    // phnq_core.extend(config, config.prod);
 });
 
 try
@@ -91,6 +91,6 @@ app.listen(config.port, function()
 });
 
 // Widgets
-phnq_widgets.start({express: app, appRoot:path.join(__dirname, config.appRoot)});
+phnq_widgets.start({express: app, appRoot:path.join(__dirname, "app")});
 
 // repl.start({});

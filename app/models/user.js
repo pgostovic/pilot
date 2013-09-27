@@ -47,7 +47,7 @@ phnq_core.extend(schema.methods,
 	setPassword: function(password)
 	{
 		var hash = crypto.createHash("md5");
-		hash.update(config.password_salt, "UTF-8");
+		hash.update(config.passwordSalt, "UTF-8");
 		hash.update(password, "UTF-8");
 		this.password = hash.digest("hex");
 	},
@@ -60,7 +60,7 @@ phnq_core.extend(schema.methods,
 	isPasswordValid: function(password)
 	{
 		var hash = crypto.createHash("md5");
-		hash.update(config.password_salt, "UTF-8");
+		hash.update(config.passwordSalt, "UTF-8");
 		hash.update(password, "UTF-8");
 		return hash.digest("hex") == this.password;
 	}
