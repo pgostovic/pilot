@@ -29,13 +29,13 @@ module.exports =
 			var options =
 			{
 				to: user.email,
-				from: "pg@phranq.com",
+				from: config.systemEmailAddress,
 				context:
 				{
 					confirmUserUrl: buf.join("")
 				}
 			};
-			
+            
 			emailUtil.sendWidget("pilot.emails.confirm_user", options, function(err, msg)
 			{
                 if(err)

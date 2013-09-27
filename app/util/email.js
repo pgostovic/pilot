@@ -2,6 +2,7 @@ var nodemailer = require("nodemailer");
 var phnq_widgets = require("phnq_widgets");
 var assert = require("assert");
 var config = require("../../config");
+var log = require("phnq_log").create(__filename);
 
 var smtpTransport = nodemailer.createTransport("SMTP", config.smtp);
 
@@ -37,7 +38,10 @@ module.exports =
 			smtpTransport.sendMail(mail, function(err, resp)
 			{
 				if(err)
+                {
+                    log.error("Error sending email: ", err);
 					return fn(err);
+                }
 					
 				fn(null, resp.message);
 			});

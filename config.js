@@ -21,5 +21,15 @@ module.exports =
     port: configNum("PORT", process.env.PORT),
     secure: configBool("SECURE", false),
     dbConnStr: config("DB_CONN_STR", "mongodb://localhost/pilot_dev"),
-    passwordSalt: config("PASSWORD_SALT", "abc123")
+    passwordSalt: config("PASSWORD_SALT", "abc123"),
+    systemEmailAddress: config("SYSTEM_EMAIL_ADDRESS", "Pilot Admin <no-reply@phnq-pilot.com>"),
+    smtp:
+    {
+        service: "Mailgun",
+        auth:
+        {
+            user: process.env.MAILGUN_SMTP_LOGIN,
+            pass: process.env.MAILGUN_SMTP_PASSWORD
+        }
+    }
 };
