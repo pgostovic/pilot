@@ -2,7 +2,7 @@
 	"name": "pilot",
 	"description": "Plan and Log for Training",
 	"author": "Patrick Gostovic <pg@phnq.org>",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"dependencies":
 	{
 		"phnq_core": "1.0.x",
