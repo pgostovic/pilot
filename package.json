@@ -19,7 +19,7 @@
 	},
 	"scripts":
 	{
-		"start": "node main",
+		"start": "node web",
 		"test": "mocha -t 60000 -R spec"
 	},
 	"engines":

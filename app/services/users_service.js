@@ -1,5 +1,5 @@
 var User = require("../models/user");
-var main = require("../../main");
+var main = require("../../web");
 var config = require("../../config");
 var textUtil = require("../util/text");
 var emailUtil = require("../util/email");
