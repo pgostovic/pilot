@@ -75,6 +75,8 @@ app.configure('production', function()
     // phnq_core.extend(config, config.prod);
 });
 
+log.info("PILOT CONFIG:\n", config);
+
 try
 {
 	mongoose.connect(config.dbConnStr);
