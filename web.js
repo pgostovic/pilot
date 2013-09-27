@@ -86,10 +86,14 @@ catch(ex)
 	log.error("Error connecting to "+config.dbConnStr, ex);
 }
 
+// Heroku sets the port with the PORT environment variable, but we still need
+// a separate port config for generating urls.
+var port = process.env.PORT || config.port;
+
 // start
-app.listen(config.port, function()
+app.listen(port, function()
 {
-	log.info("Express server listening on port %d in %s mode", config.port, app.settings.env);
+	log.info("Express server listening on port %d in %s mode", port, app.settings.env);
 });
 
 // Widgets
