@@ -1,5 +1,6 @@
 var web = require("../web");
 var assert = require("assert");
+var dbUtil = require("../app/util/db");
 var mongoose = require("mongoose");
 var User = require("../app/models/user");
 var recordsService = require("../app/services/records_service");
@@ -10,10 +11,15 @@ describe("records_service", function()
 {
 	beforeEach(function(done)
 	{
-		mongoose.connection.collections.users.drop(function(err)
-		{
-    		mongoose.connection.collections.records.drop(function(err)
-    		{
+        dbUtil.dropAllCollections(function(err)
+        {
+            if(err)
+            {
+                console.log("ERR:", err);
+                throw err;
+            }
+            else
+            {
                 user = new User();
                 user.email = "test@test.com";
                 user.setPassword("abc123");
@@ -21,8 +27,8 @@ describe("records_service", function()
                 {
         			done();
                 });
-    		})
-		})
+            }
+        });
 	});
     
 	describe("addHealthRecord", function()
