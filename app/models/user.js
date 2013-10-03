@@ -13,25 +13,6 @@ var schema = new mongoose.Schema(
 	password: { type:String, required:true }
 });
 
-phnq_core.extend(schema.statics,
-{
-	findById: function(id, fn)
-	{
-		User.findOne({"_id":id}, function(err, user)
-		{
-			fn(err, user);
-		});
-	},
-
-	findByEmail: function(email, fn)
-	{
-		User.findOne({"email":email}, function(err, user)
-		{
-			fn(err, user);
-		});
-	}
-});
-
 phnq_core.extend(schema.methods,
 {
 	toJSON: function()

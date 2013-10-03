@@ -1,3 +1,17 @@
 .__CLASS__
 {
 }
+
+.wrapper {
+  .make-row();
+}
+
+.content-main {
+  background: #eee;
+  .make-lg-column(8);
+}
+.content-secondary {
+  background: #ddd;
+  .make-lg-column(3);
+  .make-lg-column-offset(1);
+}

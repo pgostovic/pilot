@@ -17,6 +17,7 @@ var configBool = function(name, defaultValue)
 
 module.exports =
 {
+    appRoot: "app",
     host: config("HOST", os.hostname()),
     port: configNum("PORT", 8888),
     secure: configBool("SECURE", false),
@@ -31,5 +32,10 @@ module.exports =
             user: process.env.MAILGUN_SMTP_LOGIN,
             pass: process.env.MAILGUN_SMTP_PASSWORD
         }
+    },
+    
+    test:
+    {
+        dbConnStr: "mongodb://localhost/pilot_test"
     }
 };

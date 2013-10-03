@@ -54,12 +54,12 @@ app.configure('development', function()
 	phnq_widgets.config.compressCSS = false;
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
-    // var firstArg = process.argv.length > 0 && process.argv[1] ? process.argv[1] : null;
-    // 
-    // if(firstArg && firstArg.match("/mocha/"))
-    //     phnq_core.extend(config, config.test);
-    // else
-    //     phnq_core.extend(config, config.dev);
+    var firstArg = process.argv.length > 0 && process.argv[1] ? process.argv[1] : null;
+    
+    if(firstArg && firstArg.match("/mocha/"))
+    {
+        phnq_core.extend(config, config.test);
+    }
 });
 
 // Configuration: production-specific
@@ -77,26 +77,35 @@ app.configure('production', function()
 
 log.info("PILOT CONFIG:\n", config);
 
-try
-{
-	mongoose.connect(config.dbConnStr);
-}
-catch(ex)
-{
-	log.error("Error connecting to "+config.dbConnStr, ex);
-}
-
 // Heroku sets the port with the PORT environment variable, but we still need
 // a separate port config for generating urls.
 var port = process.env.PORT || config.port;
 
-// start
-app.listen(port, function()
+mongoose.connect(config.dbConnStr, function(err)
 {
-	log.info("Express server listening on port %d in %s mode", port, app.settings.env);
+    if(err)
+    {
+        log.error("Error connecting to "+config.dbConnStr, err);
+        
+        /*
+            This is not ideal. The way it is now, the app just will never start
+            up if the db is down. Need to be able to start up so at least an
+            error page can be presented. Also, what happens if the db goes down
+            while the app is running? Will it repair itself? Need to investigate...
+        */
+        
+        process.exit(1);
+        return;
+    }
+    
+    // start
+    app.listen(port, function()
+    {
+        log.info("Express server listening on port %d in %s mode", port, app.settings.env);
+    
+        // Widgets
+        phnq_widgets.start({express: app, appRoot:path.join(__dirname, config.appRoot)});
+    });
 });
-
-// Widgets
-phnq_widgets.start({express: app, appRoot:path.join(__dirname, "app")});
 
 // repl.start({});

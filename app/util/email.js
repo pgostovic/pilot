@@ -18,7 +18,7 @@ module.exports =
 	sendWidget: function(widgetType, options, fn)
 	{
         options = options || {};
-        options.from = options.from || this.defaultFromAddress;
+        options.from = options.from || config.systemEmailAddress;
         options.context = options.context || {};
         options.locale = options.locale || "en";
         

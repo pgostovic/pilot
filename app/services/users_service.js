@@ -3,9 +3,26 @@ var main = require("../../web");
 var config = require("../../config");
 var textUtil = require("../util/text");
 var emailUtil = require("../util/email");
+var log = require("phnq_log").create(__filename);
 
 module.exports =
 {
+	findById: function(id, fn)
+	{
+		User.findOne({"_id":id}, function(err, user)
+		{
+			fn(err, user);
+		});
+	},
+
+	findByEmail: function(email, fn)
+	{
+		User.findOne({"email":email}, function(err, user)
+		{
+			fn(err, user);
+		});
+	},
+    
     createUser: function(email, fn)
     {
 		var generatedPassword = textUtil.randomAlphaNnumeric(12);
@@ -29,7 +46,6 @@ module.exports =
 			var options =
 			{
 				to: user.email,
-				from: config.systemEmailAddress,
 				context:
 				{
 					confirmUserUrl: buf.join("")
